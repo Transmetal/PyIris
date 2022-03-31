@@ -3,17 +3,6 @@ The PyIris project is a modular remote access trojan toolkit written completely 
 It allows users to dynamically build, generate and encode/encrypt remote access trojan payloads for remote
 control of other compromised hosts.
 
-
-# Demo of PyIris in action on multiple operating systems (Windows and Linux)
-## Dynamically generating a payload in Windows
-![Windows Generator Demo](https://user-images.githubusercontent.com/32593795/70084865-1db4ca80-164a-11ea-8837-461fdc39a770.png)
-
-## Remotely controlling a Windows system through a scout in Ubuntu (screenshot of victims machine is of the ubuntu attacker machine since I'm running the ubuntu machine in a VM)
-![Ubuntu Scout Demo](https://user-images.githubusercontent.com/32593795/70084859-1ab9da00-164a-11ea-867f-2fb6e36106e5.png)
-
-## Creating listeners that will receive connections from the scouts in Kali Linux 
-![Kali listener Demo](https://user-images.githubusercontent.com/32593795/70084874-1f7e8e00-164a-11ea-96fb-50fcfd396f11.png)
-
 # Features (Both Windows and Linux)
 - Tab completion for most commands
 - Dynamically generate scouts
@@ -64,7 +53,7 @@ scouts
 
 First, clone this repository (make sure you have git installed), CD into the root folder.
 
-```git clone https://github.com/angus-y/PyIris-backdoor```
+```git clone https://github.com/Transmetal/PyIris```
 
 ```cd PyIris-backdoor```
 
@@ -80,7 +69,7 @@ correctly.
 
 First, clone this repository (make sure you have git installed), CD into the root folder.
 
-```git clone https://github.com/angus-y/PyIris-backdoor```
+```git clone https://github.com/Transmetal/PyIris```
 
 ```cd PyIris-backdoor```
 
@@ -151,71 +140,3 @@ The ```help``` command is your friend! Simply run ```help``` to get a list of al
 detail about a specific command, run ```help <name of command>``` to get more in depth help about it. Alternatively you can use the 
 ```?``` command which is an alias for the help command. I am planning to write a wiki soon detailing all the commands and information
 you need to use PyIris
-
-# FAQ
-
-### Why cant the compiled scout I generated in my Linux OS run on a Windows target machine? (Or vice versa)
-PyIris utilizes Pyinstaller to compile its payloads. It is therefore not possible to cross-compile binaries. That means if you 
-generate and compile a scout in Linux the binary only runs in Linux, it works the same for Windows. If you want to cross-compile 
-Windows scouts for Linux I suggest you use wine and run PyIris from there otherwise your options are very limited.
-
-### Why am I getting an attribute error "enum has no module 'IntFlag' during compilation of scouts?
-This is most probably due to a redundant library you have installed called enum34 which has already been deprecated. Uninstall the library with the command 
-
-```pip uninstall -y enum34```
-
-If you get this error while compiling with pyinstalled the compiled executable will not run. See [here](https://stackoverflow.com/questions/43124775/why-python-3-6-1-throws-attributeerror-module-enum-has-no-attribute-intflag) for more information
-
-### PyHook isn't installing on my Windows OS!
-I have already included a PyHook wheel file in the setup/windows folder however that wheel works only for 64 bit versions of Windows.
-You may have to manually install PyHook yourself. Go to [this site](https://www.lfd.uci.edu/~gohlke/pythonlibs/) and search for the 
-PyHook wheel file that works for your Windows version and download it. Next, pip install using the name of that wheel file.
-
-```pip3 install <name of pyhook wheel file>```
-
-If you downloaded the correct pyhook wheel file it should install succesfully.
-
-### I correctly created my listeners and scouts why are the scouts not connecting to my listeners?
-Since the listeners actually open ports on your machine you may have to allow the python 3 interpreter (python.exe) through your 
-firewall so that it can actually receive connections. Another reason the scouts are not connecting is that your key could have changed 
-the pre generated key prompted during a new PyIris install and run is used to authenticate and connect to the listeners. The scout could 
-have been generated with a different key than the one that the listener is expecting, the ```regen``` command at the main home interface 
-would have changed the key, alternatively you may have directly edited the resources/PyIris.cred file that contains the key
-
-### Why are there more linux components (backdoor functions) than windows components...
-Well this is due to several reasons. First, is the problem of open source code and mulitple distros. Linux has many distrubutions each 
-linux distro may be different or have a different system structure than each other linux system. Creating components to cover all of 
-them is incredibly difficult. Secondly, is support, simply put some linux systems just dont support some functions out of the box for 
-python. Lastly is the fact that the terminal in linux is much more powerful than cmd in windows, therefore a lot more things can be 
-accomplished from the terminal than from cmd so there is no need to add extra components, your trusty linux/execute_command_bash will do 
-the job for you. For example rather than adding a linux/browser component you can use the xdg-open command to open URLs its supported 
-out of the box
-
-### Why are you using a raw text protocol isn't something like HTTP less suspicious to network analyst
-Yes it is I should probably be using HTTP buuuuut I am just lazy. Perhaps in a future update but that requires rewriting a lot of the 
-listener-scout protocol which could take some time.
-
-### Hey I am a 1337 H4X0R and need to DDOS NSA and The Pentagon can you add a 1337 DDOS component
-No lol
-
-# Built with
-- [PyCharm IDE](https://www.jetbrains.com/pycharm/)
-- My brain
-
-# Want to report a bug?
-Create an issue, but before that please read the "ISSUE_TEMPLATE.md" file first
-
-# Credits
-- Inspired by [Powershell Empire](https://github.com/EmpireProject/Empire) and [Brain Damage](https://github.com/mehulj94/BrainDamage)
-- Thanks to EV-EV for helping me in the earliest stages of the project and in helping me to create PyIris from its infancy
-- Thanks to Dharshan2004 for helping build a part of the in-memory webcam module and testing PyIris on Debian
-- Thanks to Ani152 for being my (legally) unwilling test subject in testing the PyIris framework
-- Thanks to my brain for formulating this whole project
-
-# License
-Licensed under Mozilla Public License Version 2.0 - See the "LICENSE.md" file for more details
-
-# Disclaimer!
-I write stuff like this for fun and mainly to become a better at python. The purpose of this project is to challenge myself to solve problems in creative ways,
-teach myself to be better at coding and have some fun creating something cool in the process. I DO NOT CONDONE the usage of this project 
-in any unethical or unlawful manner. Do not use this without the full consent of the subject. Besides this framework isnt even that good anyways.
