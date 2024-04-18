@@ -1,13 +1,15 @@
 pywin32==301
-opencv-python==4.4.0.44
+opencv-python==4.8.1.78
 pyperclip==1.8.1
 comtypes==1.1.7
 mss==6.0.0
-Pillow==9.0.1
+Pillow==10.3.0
 PyAutoGUI==0.9.52
-PyInstaller==4.0
+PyInstaller==5.13.1
 colorama==0.4.4
 cryptography==3.3.2
 pycaw==20181226
 pyreadline==2.1
 pyWinhook==1.6.2
+numpy>=1.22.2 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
